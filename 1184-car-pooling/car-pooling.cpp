@@ -1,25 +1,18 @@
 class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
-        for (int i=0; i<trips.size(); ++i) {
-            int numPassengers=trips[i][0], from=trips[i][1], to=trips[i][2];
-            minHeap.push({from, numPassengers});
-            minHeap.push({to, -numPassengers});
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        for(int i=0;i<trips.size();i++){
+            pq.push(make_pair(trips[i][1],trips[i][0]));
+            pq.push(make_pair(trips[i][2],-trips[i][0]));
         }
-
-        int currCapacity = 0;
-        while (!minHeap.empty()) {
-            int currTime = minHeap.top().first;
-            while (!minHeap.empty() and minHeap.top().first == currTime) {
-                auto [time, numPassengers] = minHeap.top();
-                minHeap.pop();
-                currCapacity += numPassengers;
-            }
-            if (currCapacity > capacity)
-                return false;
+        int ans = 0;
+        while(!pq.empty()){
+            pair<int,int> a = pq.top();
+            pq.pop();
+            ans+=a.second;
+            if(ans>capacity) return false;
         }
-
         return true;
     }
 };
