@@ -8,10 +8,10 @@ public:
             if(child == parent)
                 continue;
             
-            int time_from_bachha_log = DFS(adj, child, curr, hasApple);
+            int time_child = DFS(adj, child, curr, hasApple);
             
-            if(time_from_bachha_log || hasApple[child])
-                time += 2 + time_from_bachha_log;
+            if(time_child || hasApple[child])
+                time += 2 + time_child;
             
         }
         
