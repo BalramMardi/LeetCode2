@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isPossible(string s1, string s2){
-        if(s1.length() != s2.length() + 1) return false;
+        
         int i = 0, j = 0;
         while(i < s1.length()){
             if(j < s2.length() && s1[i] == s2[j]){
