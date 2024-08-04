@@ -8,11 +8,11 @@ public:
 
     int twoCitySchedCost(vector<vector<int>>& costs) {
         int cost=0;
-        int n = costs.size()/2;
+        int n = costs.size();
         sort(costs.begin(),costs.end(),comparator);
 
-        for(int i=0;i<n;i++){
-            cost += costs[i][0] + costs[2*n-i-1][1];
+        for(int i=0;i<n/2;i++){
+            cost += costs[i][0] + costs[n-i-1][1];
         }
         return cost;
     }
