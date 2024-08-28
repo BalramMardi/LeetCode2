@@ -5,15 +5,36 @@ public:
         int i=0,j=0,count=0;
         int n=nums.size();
         int sum=0;
+        mp[0]=1;
         while(j<n){
             sum+=nums[j];
-            if(sum==k)
-                count++;
+            int rem = sum - k;
             if(mp.find(sum-k)!=mp.end())
-                count+=mp[sum-k];
+                count+=mp[rem];
             mp[sum]++;
             j++;
         }
         return count;
     }
 };
+
+
+
+/* class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        int i=0,j=0,count=0;
+        int n=nums.size();
+        int sum=0;
+        while(j<n){
+            sum+=nums[j];
+            int rem = sum - k;
+            if(mp.find(sum-k)!=mp.end())
+                count+=mp[rem];
+            mp[sum]++;
+            j++;
+        }
+        return count;
+    }
+}; */
