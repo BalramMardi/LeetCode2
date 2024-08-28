@@ -12,8 +12,8 @@ public:
 
         while (!q.empty()) {
             int len = q.size();
-            ll left = q.front().second; // Leftmost index in the current level
-            ll right = left;            // Rightmost index will be updated later
+            ll lefty = q.front().second; // Leftmost index in the current level
+            ll righty = lefty;            // Rightmost index will be updated later
             
             for (int i = 0; i < len; i++) {
                 auto node = q.front();
@@ -22,7 +22,7 @@ public:
                 ll idx = node.second; // Index of the current node
                 
                 // Update the rightmost index
-                right = idx;
+                righty = idx;
                 
                 // Push children into the queue with updated indices
                 if (curr->left) {
@@ -34,7 +34,7 @@ public:
             }
             
             // Calculate the width of the current level
-            maxi = max(maxi, (int)(right - left + 1));
+            maxi = max(maxi, (int)(righty - lefty + 1));
         }
         
         return maxi;
