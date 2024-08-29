@@ -20,10 +20,11 @@ public:
         TreeNode* root = new TreeNode(postorder[postEnd]);
 
         int i=inStart;
-        for(;i<=inEnd;i++){
+        while(i<=inEnd){
             if(inorder[i] == root->val){
                 break;
             }
+            i++;
         }
         int leftSide = i-inStart;
         int rightSide = inEnd - i;
