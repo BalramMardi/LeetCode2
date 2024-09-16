@@ -8,11 +8,11 @@ public:
         long long aCount = 1, eCount = 1, iCount = 1, oCount = 1, uCount = 1;
         
         for (int i = 2; i <= n; ++i) {
-            long long new_aCount = (eCount + iCount + uCount) % MOD;
+            long long new_aCount = (eCount) % MOD;
             long long new_eCount = (aCount + iCount) % MOD;
-            long long new_iCount = (eCount + oCount) % MOD;
-            long long new_oCount = iCount % MOD;
-            long long new_uCount = (iCount + oCount) % MOD;
+            long long new_iCount = (eCount + oCount + aCount + uCount) % MOD;
+            long long new_oCount = (iCount + uCount) % MOD;
+            long long new_uCount = (aCount) % MOD;
             
             // Update the counts for the next iteration
             aCount = new_aCount;
