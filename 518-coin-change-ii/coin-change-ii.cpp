@@ -14,9 +14,7 @@ public:
             return memo[idx][total];
         }
 
-        if(total < coins[idx]){
-            return memo[idx][total]= solve(coins,total,idx+1);
-        }
+        
 
         int take = solve(coins,total-coins[idx],idx);
         int skip = solve(coins,total,idx+1);
