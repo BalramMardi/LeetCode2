@@ -12,6 +12,33 @@
 class Solution {
 public:
 
+    int bfs(TreeNode* root){
+        if(!root){
+            return 0;
+        }
+        int totalSum=0;
+        queue<pair<TreeNode*,int>> queue;
+        queue.push({root,root->val});
+        while(queue.size()){
+            int len = queue.size();
+            for(int i=0;i<len;i++){
+                auto [node,sum] = queue.front();
+                queue.pop();
+                if(!node->left and !node->right){
+                    totalSum += sum;
+                }
+                if(node->left){
+                    queue.push({node->left,sum*10+node->left->val});
+                }
+                if(node->right){
+                    queue.push({node->right,sum*10+node->right->val});
+                }
+            }
+        }
+
+        return totalSum;
+    }
+
      void solve(TreeNode* root, int currentSum, int &totalSum) {
         if (!root) return; 
 
@@ -32,7 +59,8 @@ public:
 
     int sumNumbers(TreeNode* root) {
          int totalSum = 0;
-        solve(root, 0, totalSum);
-        return totalSum;
+        // solve(root, 0, totalSum);
+        // return totalSum;
+        return bfs(root);
     }
 };
