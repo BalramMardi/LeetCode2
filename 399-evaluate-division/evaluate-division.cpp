@@ -9,7 +9,7 @@ public:
             mp[B][A] = 1.0/values[i];
         }
     }
-    double dfs(string start,string &end,unordered_map<string,bool>&vis){
+    double dfs(const string &start,const string &end,unordered_map<string,bool>&vis){
         if(mp.find(start)==mp.end() or mp.find(end)==mp.end()){
             return -1.0;
         }
