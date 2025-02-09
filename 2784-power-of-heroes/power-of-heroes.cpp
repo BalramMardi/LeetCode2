@@ -7,10 +7,6 @@ public:
 
         int n = nums.size();
         long long result = 0;
-        vector<long long> pow2(n, 1);
-
-        for (int i = 1; i < n; i++)
-            pow2[i] = (pow2[i - 1] * 2) % MOD;
 
         long long prefixSum = 0;
 
