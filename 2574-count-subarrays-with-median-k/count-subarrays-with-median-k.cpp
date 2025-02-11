@@ -48,10 +48,11 @@ public:
                     result += prefix_counts[prefix_sum - 1];
                 }
             }
-
-            if (!kFound) {
+            else{
                 prefix_counts[prefix_sum]++;
+
             }
+
         }
 
         return result;
