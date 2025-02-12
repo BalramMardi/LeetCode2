@@ -9,7 +9,7 @@ public:
             while(st.size() and curr < heights[st.top()]){
                 int height =  heights[st.top()];
                 st.pop();
-                int width = (st.empty()) ? i : (i-st.top()-1);
+                int width = (st.empty()) ? (i) : (i-st.top()-1);
                 maxA = max(maxA , height*width);
             }
             st.push(i);
