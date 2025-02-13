@@ -12,24 +12,16 @@
 
 class Solution {
 public:
-    bool canPartitionHelper(const vector<int>& nums, int n, int sum) {
-        vector<vector<bool>> dp(n + 1,vector<bool>(sum + 1, false));
+    bool canPartitionHelper(const vector<int>& nums, int target) {
+        vector<bool> dp(target + 1, false);
+        dp[0] = true; // Base case: sum 0 is always possible
 
-        for (int i = 0; i <= n; i++) {
-            dp[i][0] = true;
-        }
-
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= sum; j++) {
-                if (nums[i - 1] > j) {
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
-                }
+        for (int num : nums) {
+            for (int j = target; j >= num; --j) { 
+                dp[j] = dp[j] || dp[j - num];
             }
         }
-
-        return dp[n][sum];
+        return dp[target];
     }
 
     bool canPartition(const vector<int>& nums) {
@@ -39,6 +31,6 @@ public:
             return false;
 
         int subset_sum = total_sum / 2;
-        return canPartitionHelper(nums, nums.size(), subset_sum);
+        return canPartitionHelper(nums, subset_sum);
     }
 };
