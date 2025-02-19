@@ -3,10 +3,7 @@ public:
     int n, m;
 
     bool dfs(vector<vector<char>>& grid, int row, int col, vector<vector<bool>>& visited, int parentRow, int parentCol) {
-        if (row < 0 || row >= n || col < 0 || col >= m) {
-            return false;
-        }
-
+      
         if (visited[row][col]) {
             return true; 
         }
