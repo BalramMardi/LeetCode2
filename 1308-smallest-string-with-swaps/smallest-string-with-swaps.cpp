@@ -54,6 +54,8 @@ public:
         string result = s;
         for (auto& group : groups) {
             vector<int>& indices = group.second;
+            sort(indices.begin(), indices.end());
+
             string chars;
             for (int idx : indices) {
                 chars.push_back(s[idx]);
@@ -61,7 +63,6 @@ public:
 
             // Sort characters
             sort(chars.begin(), chars.end());
-            sort(indices.begin(), indices.end());
 
             for (int i = 0; i < indices.size(); i++) {
                 result[indices[i]] = chars[i];
