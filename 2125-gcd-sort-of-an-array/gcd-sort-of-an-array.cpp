@@ -83,3 +83,77 @@ public:
         return true;
     }
 };
+
+
+/* class DSU {
+public:
+    vector<int> parent, rank;
+    DSU(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i < n; ++i)
+            parent[i] = i;
+    }
+
+    int find(int x) {
+        if (parent[x] != x)
+            parent[x] = find(parent[x]);
+        return parent[x];
+    }
+
+    void unite(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY])
+                parent[rootY] = rootX;
+            else if (rank[rootX] < rank[rootY])
+                parent[rootX] = rootY;
+            else {
+                parent[rootY] = rootX;
+                rank[rootX]++;
+            }
+        }
+    }
+};
+
+class Solution {
+    int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+public:
+    bool gcdSort(vector<int>& nums) {
+        int maxVal = *max_element(nums.begin(), nums.end());
+        DSU dsu(maxVal + 1);
+
+        // Group numbers based on GCD
+        for (int i = 0; i < nums.size(); ++i) {
+            for (int j = i + 1; j < nums.size(); ++j) {
+                if (gcd(nums[i], nums[j]) > 1) {
+                    dsu.unite(nums[i], nums[j]);
+                }
+            }
+        }
+
+        // Sort the array
+        vector<int> sortedNums = nums;
+        sort(sortedNums.begin(), sortedNums.end());
+
+        // Check if sorting is possible
+        for (int i = 0; i < nums.size(); ++i) {
+            if (nums[i] == sortedNums[i]) continue;
+            if (dsu.find(nums[i]) != dsu.find(sortedNums[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+}; */
+
+
