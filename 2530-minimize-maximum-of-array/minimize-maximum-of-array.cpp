@@ -22,7 +22,7 @@ public:
 
     
     
-    /* int minimizeArrayValue(vector<int>& nums) {
+    int minimizeArrayValue(vector<int>& nums) {
         int n = nums.size();
         
         int maxL = 0;
@@ -44,9 +44,14 @@ public:
         }
         
         return result;
-    } */
+    }
 
-    int minimizeArrayValue(vector<int>& nums) {
+    
+};
+
+
+
+/* int minimizeArrayValue(vector<int>& nums) {
         int n = nums.size();
         long long prefix_sum = 0;
         int max_val = 0;
@@ -59,7 +64,4 @@ public:
         
         return max_val;
 
-    }
-
-    
-};
+} */
