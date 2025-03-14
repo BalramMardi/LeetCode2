@@ -18,7 +18,8 @@ public:
 
             if (right - left + 1 == minSize && uniqueCount <= maxLetters) {
                 string sub = s.substr(left, minSize);
-                maxOccurrence = max(maxOccurrence, ++freq[sub]);
+                freq[sub]++;
+                maxOccurrence = max(maxOccurrence, freq[sub]);
             }
         }
         
