@@ -1,13 +1,13 @@
 class Solution {
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        std::vector<int> curr;
-        std::vector<std::vector<int>> res;
+        vector<int> curr;
+        vector<vector<int>> res;
         helper(candidates, target, 0, curr, res);
         return res;
     }
 private:
-    void helper(std::vector<int>& cands, int target, int i, std::vector<int>& curr,  std::vector<std::vector<int>>& res) {
+    void helper(vector<int>& cands, int target, int i, vector<int>& curr,  vector<vector<int>>& res) {
         if (i >= cands.size() || target < 0)
             return;
 
