@@ -1,5 +1,75 @@
 class Solution {
 public:
+    int n;
+    pair<int, int> BFS(unordered_map<int, vector<int>>& adj, int source) {
+        queue<int> que;
+        que.push(source);
+
+        unordered_map<int, bool> visited;
+        visited[source] = true;
+
+        int distance = 0;
+        int farthestNode = source;
+
+        while(!que.empty()) {
+            int size = que.size(); 
+
+            while(size--) {
+                int curr = que.front();
+                que.pop();
+
+                farthestNode = curr;
+
+                for(auto &nbr : adj[curr]) {
+                    if(visited[nbr] == false) {
+                        visited[nbr] = true;
+                        que.push(nbr);
+                    }
+                }
+            }
+            if(!que.empty()) {
+                distance++;
+            }
+        }
+
+        return {farthestNode, distance};
+
+    }
+
+    int findDiameter(unordered_map<int, vector<int>> adj) {
+        auto [farthestNode, dist] = BFS(adj, 0);
+        auto [otherEndNode, diameter] = BFS(adj, farthestNode);
+        return diameter;
+    }
+
+    unordered_map<int, vector<int>> buildAdj(vector<vector<int>>& edges) {
+        unordered_map<int, vector<int>> adj;
+
+        for(auto &edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        return adj;
+    }
+
+    int minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<vector<int>>& edges2) {
+        unordered_map<int, vector<int>> adj1 = buildAdj(edges1);
+        unordered_map<int, vector<int>> adj2 = buildAdj(edges2);
+
+        int d1 = findDiameter(adj1);
+        int d2 = findDiameter(adj2);
+
+        int combined = (d1+1)/2 + (d2+1)/2 + 1;
+
+        return max({d1, d2, combined});
+        
+    }
+};
+
+/* class Solution {
+public:
     int minimumDiameterAfterMerge(vector<vector<int>>& edges1,
                                   vector<vector<int>>& edges2) {
         int n = edges1.size() + 1;
@@ -34,21 +104,15 @@ private:
     pair<int, int> findDiameter(vector<vector<int>>& adjList, int node,
                                 int parent) {
         int maxDepth1 = 0,
-            maxDepth2 =
-                0; 
+            maxDepth2 = 0; 
         int diameter = 0;  
 
-        for (int neighbor :
-             adjList[node]) {  
+        for (int neighbor : adjList[node]) {  
             if (neighbor == parent)
                 continue;  
 
-           
             auto [childDiameter, depth] = findDiameter(adjList, neighbor, node);
-
-           
             diameter = max(diameter, childDiameter);
-
             depth++; 
             if (depth > maxDepth1) {
                 maxDepth2 = maxDepth1;
@@ -62,4 +126,4 @@ private:
 
         return {diameter, maxDepth1};
     }
-};
+}; */
