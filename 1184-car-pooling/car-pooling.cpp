@@ -1,4 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
+public:
+    bool carPooling(vector<vector<int>>& trips, int capacity) {
+        vector<pair<int, int>> events;
+
+        for (auto& trip : trips) {
+            events.push_back({trip[1], trip[0]}); 
+            events.push_back({trip[2], -trip[0]});
+        }
+
+        sort(events.begin(), events.end(), [](pair<int, int>& a, pair<int, int>& b) {
+            return a.first == b.first ? a.second < b.second : a.first < b.first;
+        });
+
+        int currentPassengers = 0;
+        
+        for (auto& event : events) {
+            currentPassengers += event.second;
+            if (currentPassengers > capacity) return false;
+        }
+
+        return true;
+    }
+};
+
+
+
+/* class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
@@ -15,4 +45,4 @@ public:
         }
         return true;
     }
-};
+}; */
