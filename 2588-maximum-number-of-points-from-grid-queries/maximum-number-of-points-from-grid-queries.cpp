@@ -25,10 +25,10 @@ public:
                 count++;
 
                 for (int d = 0; d < 4; d++) {
-                    int nx = x + dir[d][0], ny = y + dir[d][1];
-                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && !vis[nx][ny]) {
-                        pq.push({grid[nx][ny], {nx, ny}});
-                        vis[nx][ny] = true;
+                    int new_x = x + dir[d][0], new_y = y + dir[d][1];
+                    if (new_x >= 0 && new_x < n && new_y >= 0 && new_y < m && !vis[new_x][new_y]) {
+                        pq.push({grid[new_x][new_y], {new_x, new_y}});
+                        vis[new_x][new_y] = true;
                     }
                 }
             }
