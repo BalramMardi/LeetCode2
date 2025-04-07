@@ -1,20 +1,8 @@
-/*
-    Given non-empty, non-negative integer array nums, find if:
-    Can be partitionined into 2 subsets such that sums are equal
-    Ex. nums = [1,5,11,5] -> true, [1,5,5] & [11], both add to 11
-
-    Maintain DP set, for each num, check if num in set + curr = target
-    If not, add curr to every num in set we checked & iterate
-
-    Time: O(n x sum(nums))
-    Space: O(sum(nums))
-*/
-
 class Solution {
 public:
     bool canPartitionHelper(const vector<int>& nums, int target) {
         vector<bool> dp(target + 1, false);
-        dp[0] = true; // Base case: sum 0 is always possible
+        dp[0] = true; 
 
         for (int num : nums) {
             for (int j = target; j >= num; --j) { 
