@@ -10,9 +10,7 @@ public:
         int maxCoins = 0;
 
         for (int k = i + 1; k < j; k++) {
-            int coins = arr[i] * arr[k] * arr[j];
-            coins += solve(arr, i, k);
-            coins += solve(arr, k, j);
+            int coins = arr[i] * arr[k] * arr[j] + solve(arr, i, k) + solve(arr, k, j);
             maxCoins = max(maxCoins, coins);
         }
 
