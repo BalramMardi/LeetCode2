@@ -2,6 +2,34 @@ class Solution {
 public:
     int countCompleteSubarrays(vector<int>& nums) {
         int n = nums.size();
+        int totalDistinct = unordered_set<int>(nums.begin(), nums.end()).size();
+        
+        unordered_map<int, int> freq;
+        int res = 0, left = 0;
+
+        for (int right = 0; right < n; ++right) {
+            freq[nums[right]]++;
+
+            while (freq.size() == totalDistinct) {
+                if (--freq[nums[left]] == 0)
+                    freq.erase(nums[left]);
+                left++;
+            }
+
+            res += left;
+        }
+
+        return res;
+    }
+
+
+};
+
+
+/* class Solution {
+public:
+    int countCompleteSubarrays(vector<int>& nums) {
+        int n = nums.size();
         
         int totalDistinct = unordered_set<int>(nums.begin(), nums.end()).size();
         
@@ -28,4 +56,4 @@ public:
         return res;
     }
 
-};
+}; */
