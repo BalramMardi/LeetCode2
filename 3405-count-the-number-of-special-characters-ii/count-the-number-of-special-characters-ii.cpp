@@ -1,21 +1,32 @@
 class Solution {
 public:
-    int numberOfSpecialChars(string s) 
-    {
-        map<char,int>mp;
-        int ans = 0, n = s.size();
-        for(int i=0;i<n;i++) 
-        {
-            char ch = s[i];
-            if(islower(ch)) mp[ch] = i+1;
-            else if(mp[ch] == 0) mp[ch] = i+1;
+    int numberOfSpecialChars(string word) {
+        vector<int> lowerFirst(26, -1); 
+        vector<int> lowerLast(26, -1);  
+        vector<int> upperFirst(26, -1);
+        
+        for (int i = 0; i < word.size(); ++i) {
+            char c = word[i];
+            if (islower(c)) {
+                int idx = c - 'a';
+                if (lowerFirst[idx] == -1) {
+                    lowerFirst[idx] = i;
+                }
+                lowerLast[idx] = i;
+            } else {
+                int idx = c - 'A';
+                if (upperFirst[idx] == -1) {
+                    upperFirst[idx] = i;
+                }
+            }
         }
         
-        for(char i='a';i<='z';i++)
-        {
-            int x = mp[i], y = mp[i - 'a' + 'A'];
-            if(x and y and x < y) ans++;
+        int count = 0;
+        for (int i = 0; i < 26; ++i) {
+            if (lowerFirst[i] != -1 && upperFirst[i] != -1 && lowerLast[i] < upperFirst[i]) {
+                count++;
+            }
         }
-        return ans;
+        return count;
     }
 };
