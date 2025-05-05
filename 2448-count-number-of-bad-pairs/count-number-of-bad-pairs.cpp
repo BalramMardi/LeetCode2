@@ -8,7 +8,7 @@ public:
             int diff = pos - nums[pos];
             int goodPairsCount = diffCount[diff];
             badPairs += pos - goodPairsCount;
-            diffCount[diff] = goodPairsCount + 1;
+            diffCount[diff]++;
         }
 
         return badPairs;
