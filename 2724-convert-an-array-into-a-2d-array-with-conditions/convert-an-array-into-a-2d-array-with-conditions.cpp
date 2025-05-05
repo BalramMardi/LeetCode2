@@ -2,6 +2,34 @@ class Solution {
 public:
     vector<vector<int>> findMatrix(vector<int>& nums) {
         unordered_map<int, int> freq;
+
+        int maxi = 0;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            freq[nums[i]]++;
+            maxi = max(maxi, freq[nums[i]]);
+        }
+
+        vector<vector<int>> vec(maxi);
+
+        for (auto &[key, f] : freq)
+        {
+            for (int i = 0; i < f; i++)
+            {
+                vec[i].push_back(key);
+            }
+        }
+
+        return vec;
+    }
+};
+
+
+
+/* class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        unordered_map<int, int> freq;
         int maxFreq = 0;
 
         // Count frequencies and determine the maximum frequency
@@ -25,3 +53,4 @@ public:
         return ans;
     }
 };
+ */
