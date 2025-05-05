@@ -13,13 +13,8 @@ public:
             for(int j =0;j<cols;j++){
                 end_of_brick += wall[i][j];
 
-                if(end_count.find(end_of_brick)!=end_count.end())
-                {
-                    end_count[end_of_brick]++;
-                }
-                else{
-                    end_count[end_of_brick] = 1;
-                }
+                 end_count[end_of_brick]++;
+                
                 max_end_count = max(max_end_count,end_count[end_of_brick]);
             }
         }
