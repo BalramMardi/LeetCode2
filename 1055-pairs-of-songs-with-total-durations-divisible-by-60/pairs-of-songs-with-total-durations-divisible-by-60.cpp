@@ -7,7 +7,9 @@ public:
         for(int t : time) {
             int rem = t % 60;
 
-            int complement = (rem == 0) ? 0 : 60-rem;
+            // int complement = (rem == 0) ? 0 : 60-rem;
+
+            int complement = (60-rem) % 60;
 
             count += remainder[complement];
 
