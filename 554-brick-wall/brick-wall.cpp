@@ -2,8 +2,8 @@ class Solution {
 public:
     int leastBricks(vector<vector<int>>& wall) {
 
-        map<int,int> end_count;
-        int end_of_brick, max_end_count=0;
+        map<long long,int> end_count;
+        long long end_of_brick; int max_end_count=0;
 
         int rows = wall.size(),cols;
 
