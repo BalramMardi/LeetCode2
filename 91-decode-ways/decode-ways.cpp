@@ -1,14 +1,28 @@
-/*
-    Given a string w/ only digits, return # ways to decode it (letter -> digit)
-    Ex. s = "12" -> 2 (AB 1 2 or L 12), s = "226" -> 3 (2 26 or 22 6 or 2 2 6)
+class Solution {
+public:
+    int helper(int i, string &s, vector<int> &dp) {
+        if (i == s.size()) return 1;
+        if (s[i] == '0') return 0;
+        if (dp[i] != -1) return dp[i];
 
-    DP: At each digit, check validity of ones & tens, if valid add to # ways
-    Recurrence relation: dp[i] += dp[i-1] (if valid) + dp[i-2] (if valid)
+        int res = helper(i + 1, s, dp);  // single digit
+        if (i + 1 < s.size()) {
+            int twoDigit = stoi(s.substr(i, 2));
+            if (twoDigit >= 10 && twoDigit <= 26) {
+                res += helper(i + 2, s, dp);  // two digit
+            }
+        }
+        return dp[i] = res;
+    }
 
-    Time: O(n)
-    Space: O(n)
-*/
+    int numDecodings(string s) {
+        int n = s.size();
+        vector<int> dp(n, -1);
+        return helper(0, s, dp);
+    }
+};
 
+/* 
 class Solution {
 public:
     int numDecodings(string s) {
@@ -36,3 +50,4 @@ public:
         return dp[n];
     }
 };
+ */
