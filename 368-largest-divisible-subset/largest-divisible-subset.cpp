@@ -10,9 +10,9 @@ public:
         int last_chosen_index = 0;
         int maxL = 1;
 
-        for(int i = 0; i < n; i++) {
+        for(int i = 1; i < n; i++) {
             for(int j = 0; j < i; j++) {
-                if(nums[i]%nums[j] == 0) {
+                if(nums[i] % nums[j] == 0) {
                     if(t[i] < t[j]+1) {
                         t[i] = t[j]+1;
                         prev_idx[i] = j;
