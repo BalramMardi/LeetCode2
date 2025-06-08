@@ -1,8 +1,8 @@
 class Solution {
 public:
     struct trieNode {
-        trieNode* left;
-        trieNode* right;
+        trieNode* zero;
+        trieNode* one;
     };
 
     void insert(trieNode* root, int num) {
@@ -13,15 +13,15 @@ public:
             bool ith = (num >> i) & 1;
 
             if (!ith) {
-                if (!curr->left) {
-                    curr->left = new trieNode();
+                if (!curr->zero) {
+                    curr->zero = new trieNode();
                 }
-                curr = curr->left;
+                curr = curr->zero;
             } else {
-                if (!curr->right) {
-                    curr->right = new trieNode();
+                if (!curr->one) {
+                    curr->one = new trieNode();
                 }
-                curr = curr->right;
+                curr = curr->one;
             }
         }
     }
@@ -33,18 +33,18 @@ public:
         for (int i = 31; i >= 0; i--) {
             int ith = (num >> i) & 1;
             if (ith == 1) {
-                if (curr->left) {
+                if (curr->zero) {
                     maxOr += pow(2, i);
-                    curr = curr->left;
+                    curr = curr->zero;
                 } else {
-                    curr = curr->right;
+                    curr = curr->one;
                 }
             } else {
-                if (curr->right) {
+                if (curr->one) {
                     maxOr += pow(2, i);
-                    curr = curr->right;
+                    curr = curr->one;
                 } else {
-                    curr = curr->left;
+                    curr = curr->zero;
                 }
             }
         }
