@@ -1,22 +1,27 @@
 class Solution {
 public:
-    int dp[1001];
-
-    int solve(int n) {
-        if (n == 1) return 0;
-        if (dp[n] != -1) return dp[n];
-
-        dp[n] = n; 
-        for (int i = n - 1; i >= 1; i--) {
-            if (n % i == 0) {
-                dp[n] = min(dp[n], solve(i) + (n / i));
-            }
-        }
-        return dp[n];
-    }
+    int n;
+    vector<vector<int>> memo;
 
     int minSteps(int n) {
-        memset(dp, -1, sizeof(dp));
-        return solve(n);
+        if (n == 1) return 0;
+        this->n = n;
+
+        memo = vector<vector<int>>(n + 1, vector<int>(n / 2 + 1, 0));
+        return 1 + minStepsHelper(1, 1);
+    }
+
+    int minStepsHelper(int currLen, int pasteLen) {
+        if (currLen == n) return 0;
+        if (currLen > n) return 1000;
+
+        if (memo[currLen][pasteLen] != 0) return memo[currLen][pasteLen];
+
+        int opt1 = 1 + minStepsHelper(currLen + pasteLen, pasteLen);
+        int opt2 = 2 + minStepsHelper(currLen * 2, currLen);
+
+        memo[currLen][pasteLen] = min(opt1, opt2);
+        
+        return memo[currLen][pasteLen];
     }
 };
