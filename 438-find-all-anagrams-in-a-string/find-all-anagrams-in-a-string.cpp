@@ -1,4 +1,40 @@
+
 class Solution
+{
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> result;
+        if (s.length() < p.length()) {
+            return result;
+        }
+
+        vector<int> p_freq(26, 0);
+        vector<int> window_freq(26, 0);
+
+        for (int i = 0; i < p.length(); ++i) {
+            p_freq[p[i] - 'a']++;
+            window_freq[s[i] - 'a']++;
+        }
+
+        if (p_freq == window_freq) {
+            result.push_back(0);
+        }
+
+        for (int i = p.length(); i < s.length(); ++i) {
+            window_freq[s[i] - 'a']++;
+            window_freq[s[i - p.length()] - 'a']--;
+
+            if (p_freq == window_freq) {
+                result.push_back(i - p.length() + 1);
+            }
+        }
+
+        return result;
+    }
+};
+
+
+/* class Solution
 {
     public:
     vector<int> findAnagrams(string s, string p) {
@@ -25,7 +61,7 @@ class Solution
         return result;
     }
 
-};
+}; */
 
 
 /* class Solution {
