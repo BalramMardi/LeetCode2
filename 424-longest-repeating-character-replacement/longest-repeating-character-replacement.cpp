@@ -8,15 +8,13 @@ public:
 
         for (int r = 0; r < s.length(); r++) {
             arr[s[r] - 'A']++;
-            maxCount = std::max(maxCount, arr[s[r] - 'A']);
+            maxCount = max(maxCount, arr[s[r] - 'A']);
 
-            // Now we check if our current window is valid or not
             if (r - l + 1 - maxCount > k) { 
-                // This means the number of replacements is more than allowed (k)
                 arr[s[l] - 'A']--;  
                 l++;
             }
-            res = std::max(res, r - l + 1);
+            res = max(res, r - l + 1);
         }
 
         return res;
