@@ -5,6 +5,7 @@ public:
         int left = 0;
         long curr = 0;
         
+        int ans=0;
         for (int right = 0; right < nums.size(); right++) {
             long target = nums[right];
             curr += target;
@@ -13,9 +14,12 @@ public:
                 curr -= nums[left];
                 left++;
             }
+
+            ans= max(ans, right-left+1);
         }
         
-        return nums.size() - left;
+        // return nums.size() - left;
+        return ans;
     }
 };
 
