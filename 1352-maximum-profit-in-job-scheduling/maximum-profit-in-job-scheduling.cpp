@@ -3,14 +3,13 @@ public:
     int memo[50001];
     int n;
 
-    // Find the first job where the starting point >= currentJob end point
     int getNextIndex(vector<vector<int>>& array, int l, int currentJobEnd) {
         int r = n - 1;
-        int result = n; // set result to n, not n + 1
+        int result = n; 
         
         while (l <= r) {
             int mid = l + (r - l) / 2;
-            if (array[mid][0] >= currentJobEnd) { // valid next job
+            if (array[mid][0] >= currentJobEnd) { 
                 result = mid;
                 r = mid - 1;
             } else {
@@ -29,17 +28,16 @@ public:
             return memo[i];
         
         int next = getNextIndex(array, i + 1, array[i][1]);
-        int taken = array[i][2] + solve(array, next); // taking this job
-        int notTaken = solve(array, i + 1); // skipping this job
+        int taken = array[i][2] + solve(array, next); 
+        int notTaken = solve(array, i + 1); 
         
         return memo[i] = max(taken, notTaken);
     }
 
     int jobScheduling(vector<int>& startTime, vector<int>& endTime, vector<int>& profit) {
         n = startTime.size();
-        memset(memo, -1, sizeof(memo)); // initialize memo array to -1
+        memset(memo, -1, sizeof(memo));
         
-        // Store jobs as {startTime, endTime, profit}
         vector<vector<int>> array(n, vector<int>(3, 0)); 
         for (int i = 0; i < n; i++) {
             array[i][0] = startTime[i];
@@ -47,11 +45,8 @@ public:
             array[i][2] = profit[i];
         }
         
-        // Sort by start time
-        sort(begin(array), end(array), [](auto& vec1, auto& vec2) {
-            return vec1[0] < vec2[0];
-        });
+        sort(begin(array), end(array));
         
-        return solve(array, 0); // start from the 0th job
+        return solve(array, 0); 
     }
 };
