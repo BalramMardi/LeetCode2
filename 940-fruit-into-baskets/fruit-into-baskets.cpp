@@ -1,18 +1,20 @@
 class Solution {
 public:
     int totalFruit(vector<int>& A) {
-         int i=0,j=0,n=A.size(),maxi=0;
+         int left=0,right=0,n=A.size(),maxi=0;
 
         unordered_map<int,int>m;
-        while(j<n)
+
+        for(int right=0;right<n;right++)
         {
-            m[A[j]]++;
+            m[A[right]]++;
+
             if(m.size()>2){
-                if(--m[A[i]]==0)m.erase(A[i]);
-                i++;
+                if(--m[A[left]]==0)m.erase(A[left]);
+                left++;
             }
-            maxi=max(maxi,j-i+1);
-            j++;
+            
+            maxi=max(maxi,right-left+1);
         }
        
         return maxi;
