@@ -13,6 +13,7 @@ public:
         for(auto meeting : meetings){
             int start = meeting[0];
             int end = meeting[1];
+            
             //release the occupied rooms
             while(occupied.size() and occupied.top().first <= start){
                 available.push(occupied.top().second);
