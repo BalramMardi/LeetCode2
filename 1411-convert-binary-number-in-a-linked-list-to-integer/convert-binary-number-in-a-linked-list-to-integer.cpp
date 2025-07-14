@@ -12,6 +12,21 @@ class Solution {
 public:
     int getDecimalValue(ListNode* head) {
         
+        int num=0;
+        while(head){
+            num = ((num << 1)|(head->val));
+            head = head->next;
+        }
+        
+        return num;
+    }
+};
+
+
+/* class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        
         ListNode* curr =head;
         string bin="";
         while(curr){
@@ -27,4 +42,4 @@ public:
         }
         return num;
     }
-};
+}; */
