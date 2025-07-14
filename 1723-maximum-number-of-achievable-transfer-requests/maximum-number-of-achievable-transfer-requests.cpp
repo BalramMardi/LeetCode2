@@ -9,7 +9,7 @@ public:
             int current_requests = 0;
 
             for (int i = 0; i < m; ++i) {
-                if ((mask >> i) & 1) {
+                if (mask & (1 << i)) {
                     degree[requests[i][0]]--;
                     degree[requests[i][1]]++;
                     current_requests++;
