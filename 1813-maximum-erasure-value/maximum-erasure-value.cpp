@@ -1,6 +1,29 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
+        unordered_set<int> st;
+        int l = 0, sum = 0, maxi = 0;
+
+        for (int r = 0; r < nums.size(); r++) {
+            while (st.count(nums[r])) {
+                st.erase(nums[l]);
+                sum -= nums[l];
+                l++;
+            }
+
+            st.insert(nums[r]);
+            sum += nums[r];
+            maxi = max(maxi, sum);
+        }
+
+        return maxi;
+    }
+};
+
+
+/* class Solution {
+public:
+    int maximumUniqueSubarray(vector<int>& nums) {
         unordered_map<int, int> mp;
         int maxi = 0, sum = 0;
         int l = 0;
@@ -23,3 +46,4 @@ public:
         return maxi;
     }
 };
+ */
