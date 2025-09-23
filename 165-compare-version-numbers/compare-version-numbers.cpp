@@ -1,6 +1,39 @@
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
+        vector<int> v1, v2;
+
+        // split version1
+        stringstream ss1(version1);
+        string token;
+        while (getline(ss1, token, '.')) {
+            v1.push_back(stoi(token));
+        }
+
+        // split version2
+        stringstream ss2(version2);
+        while (getline(ss2, token, '.')) {
+            v2.push_back(stoi(token));
+        }
+
+        // normalize lengths
+        int n = max(v1.size(), v2.size());
+        v1.resize(n, 0);
+        v2.resize(n, 0);
+
+        // compare part by part
+        for (int i = 0; i < n; i++) {
+            if (v1[i] < v2[i]) return -1;
+            if (v1[i] > v2[i]) return 1;
+        }
+
+        return 0;
+    }
+};
+
+/* class Solution {
+public:
+    int compareVersion(string version1, string version2) {
         int i = 0, j = 0;
         int n = version1.size(), m = version2.size();
 
@@ -36,4 +69,4 @@ public:
 
         return 0;
     }
-};
+}; */
