@@ -20,7 +20,7 @@ public:
             return result;
         }
 
-        for (int end = start; end <= s.size(); ++end) {
+        for (int end = start; end < s.size(); ++end) {
             string word = s.substr(start, end - start+1);
             if (wordSet.find(word) != wordSet.end()) {
                 vector<string> subList = solve(s, end+1);
