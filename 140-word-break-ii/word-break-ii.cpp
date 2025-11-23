@@ -20,10 +20,10 @@ public:
             return result;
         }
 
-        for (int end = start + 1; end <= s.size(); ++end) {
-            string word = s.substr(start, end - start);
+        for (int end = start; end <= s.size(); ++end) {
+            string word = s.substr(start, end - start+1);
             if (wordSet.find(word) != wordSet.end()) {
-                vector<string> subList = solve(s, end);
+                vector<string> subList = solve(s, end+1);
                 for (string sub : subList) {
                     result.push_back(word + (sub.empty() ? "" : " ") + sub);
                 }
