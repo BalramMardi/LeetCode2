@@ -1,18 +1,19 @@
 class Solution {
 public:
-    int minScoreTriangulation(vector<int>& A) {
-        int n = A.size();
+    int minScoreTriangulation(vector<int>& values) {
+        int n = values.size();
         vector<vector<int>> dp(n, vector<int>(n, 0));
 
-        for (int i = n - 1; i >= 0; --i) {
-            for (int j = i + 2; j < n; ++j) { 
+        for (int len = 3; len <= n; len++) {
+            for (int i = 0; i < n - len+1; i++) {
+                int j = i + len - 1;
                 dp[i][j] = INT_MAX;
-                for (int k = i + 1; k < j; ++k) {
-                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j] + A[i] * A[k] * A[j]);
+                for (int k = i + 1; k < j; k++) {
+                    int score = dp[i][k] + dp[k][j] + values[i] * values[k] * values[j];
+                    dp[i][j] = min(dp[i][j], score);
                 }
             }
         }
-
         return dp[0][n - 1];
     }
 };
