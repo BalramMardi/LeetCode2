@@ -20,7 +20,6 @@ public:
                 mini = min(mini, i-mp[needed]);
             }
 
-            // mp.insert({currentSum,i});
             mp[currentSum]=i;
 
         }
