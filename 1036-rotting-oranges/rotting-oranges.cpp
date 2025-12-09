@@ -1,65 +1,51 @@
 class Solution {
 public:
-    int orangesRotting(vector<vector<int>>& adj) {
-        int n = adj.size();
-    int m = adj[0].size();
+    int orangesRotting(vector<vector<int>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
 
-    int delrow[] = {-1, 0, 1, 0};
-    int delcol[] = {0, 1, 0, -1};
+        queue<pair<int,int>> q;
+        int fresh = 0;
 
-    int vis[n][m];
-
-    queue<pair<pair<int, int>, int>> q;
-
-    int count = 0;
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            if (adj[i][j] == 2)
-            {
-                q.push({{i, j}, 0});
-                vis[i][j] = 2;
-            }
-            else
-            {
-                vis[i][j] = 0;
-            }
-
-            if (adj[i][j] == 1)
-                count++;
-        }
-    }
-    int cnt = 0, tm = 0;
-    while (!q.empty())
-    {
-        int row = q.front().first.first;  // row index
-        int col = q.front().first.second; // col index
-        int t = q.front().second;         // time an orange at a
-                                          // cell takes to rot.
-        q.pop();
-
-        tm = max(tm, t);
-
-        // checking for adjacent nodes in 4 directions.
-        for (int i = 0; i < 4; i++)
-        {
-            int nrow = row + delrow[i];
-            int ncol = col + delcol[i];
-
-            // checking the validity of a node and also
-            // vis[nrow][ncol] !=2
-            if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && adj[nrow][ncol] == 1 && vis[nrow][ncol] != 2)
-            {
-                vis[nrow][ncol] = 2;           // adj orange is rotten
-                q.push({{nrow, ncol}, t + 1}); // incrementing time for
-                                               // that orange by 1
-                cnt++;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == 2) {
+                    q.push({i, j});
+                }
+                else if (grid[i][j] == 1) {
+                    fresh++;
+                }
             }
         }
-    }
 
-    return (cnt == count) ? tm : -1;
+        if (fresh == 0) return 0;
+
+        int minutes = -1;
+        int dir[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
+
+        while (!q.empty()) {
+            int sz = q.size();
+            minutes++;              
+
+            while (sz--) {
+                auto [r, c] = q.front();
+                q.pop();
+
+                for (auto& d : dir) {
+                    int nr = r + d[0];
+                    int nc = c + d[1];
+
+                    if (nr >= 0 && nr < n && nc >= 0 && nc < m && grid[nr][nc] == 1) {
+                        grid[nr][nc] = 2; 
+                        fresh--;
+                        q.push({nr, nc});
+                    }
+                }
+            }
+        }
+
+        if (fresh > 0) return -1;
+
+        return minutes;
     }
 };
