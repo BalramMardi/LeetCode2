@@ -1,5 +1,52 @@
 class Solution {
 public:
+    vector<vector<int>> findFarmland(vector<vector<int>> &grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> ans;
+
+        int dir[4][2] = {{1,0},{0,1},{-1,0},{0,-1}};
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+
+                if (grid[i][j] != 1) continue;   
+
+                queue<pair<int,int>> q;
+                q.push({i, j});
+                grid[i][j] = 0;
+
+                int rmin = i, rmax = i, cmin = j, cmax = j;
+
+                while (!q.empty()) {
+                    auto [row, col] = q.front(); q.pop();
+
+                    for (int d = 0; d < 4; d++) {
+                        int nr = row + dir[d][0];
+                        int nc = col + dir[d][1];
+
+                        if (nr >= 0 && nr < n && nc >= 0 && nc < m && grid[nr][nc] == 1) {
+                            q.push({nr, nc});
+                            grid[nr][nc] = 0;
+
+                            rmin = min(rmin, nr);
+                            rmax = max(rmax, nr);
+                            cmin = min(cmin, nc);
+                            cmax = max(cmax, nc);
+                        }
+                    }
+                }
+
+                ans.push_back({rmin, cmin, rmax, cmax});  
+            }
+        }
+
+        return ans;
+    }
+};
+
+/* class Solution {
+public:
     int n, m;
     vector<vector<int>> res;
     int rmin, rmax, cmin, cmax;
@@ -42,4 +89,4 @@ public:
 
         return res;
     }
-};
+}; */
