@@ -10,11 +10,7 @@ public:
             }
         }
 
-        for(auto& [k,f]:mp){
-            if(f == c){
-                return k;
-            }
-        }
+ 
 
         return 0;
         
