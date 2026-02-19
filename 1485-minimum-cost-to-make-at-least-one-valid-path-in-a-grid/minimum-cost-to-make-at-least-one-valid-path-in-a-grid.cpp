@@ -1,40 +1,42 @@
 class Solution {
 public:
    
-    vector<vector<int>> dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
     int minCost(vector<vector<int>>& grid) {
-        int numRows = grid.size(), numCols = grid[0].size();
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        vector<vector<int>> dist(m, vector<int>(n, INT_MAX));
+        deque<pair<int, int>> dq;
 
-        priority_queue<vector<int>, vector<vector<int>>, greater<>> pq;
-        pq.push({0, 0, 0});
+        int dr[] = {0, 0, 1, -1};
+        int dc[] = {1, -1, 0, 0};
 
-        vector<vector<int>> minCost(numRows, vector<int>(numCols, INT_MAX));
-        minCost[0][0] = 0;
+        dist[0][0] = 0;
+        dq.push_back({0, 0});
 
-        while (!pq.empty()) {
-            auto curr = pq.top();
-            pq.pop();
-            int cost = curr[0], row = curr[1], col = curr[2];
+        while (!dq.empty()) {
+            pair<int, int> curr = dq.front();
+            int r = curr.first;
+            int c = curr.second;
+            dq.pop_front();
 
-            if (minCost[row][col] != cost) continue;
+            for (int i = 0; i < 4; i++) {
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                int weight = (grid[r][c] == i + 1) ? 0 : 1;
 
-            for (int dir = 0; dir < 4; dir++) {
-                int newRow = row + dirs[dir][0];
-                int newCol = col + dirs[dir][1];
-
-                if (newRow >= 0 && newRow < numRows && newCol >= 0 &&
-                    newCol < numCols) {
-                    int newCost = cost + (dir != (grid[row][col] - 1) ? 1 : 0);
-
-                    if (minCost[newRow][newCol] > newCost) {
-                        minCost[newRow][newCol] = newCost;
-                        pq.push({newCost, newRow, newCol});
+                if (nr >= 0 && nr < m && nc >= 0 && nc < n) {
+                    if (dist[r][c] + weight < dist[nr][nc]) {
+                        dist[nr][nc] = dist[r][c] + weight;
+                        if (weight == 0) {
+                            dq.push_front({nr, nc});
+                        } else {
+                            dq.push_back({nr, nc});
+                        }
                     }
                 }
             }
         }
-
-        return minCost[numRows - 1][numCols - 1];
+        return dist[m - 1][n - 1];
     }
 };
