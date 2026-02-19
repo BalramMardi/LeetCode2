@@ -1,8 +1,7 @@
 class Solution {
 public:
     int countBinarySubstrings(string s) {
-        using namespace std;
-
+ 
         int prev = 0;     
         int curr = 1;     
         int ans = 0;
