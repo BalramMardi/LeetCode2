@@ -13,7 +13,7 @@ public:
         for(int i = 0; i < s.size(); i++) {
             if(s1[i] != s[i]) ++ans1;
             if(s2[i] != s[i]) ++ans2;
-            if(i >= n) { //the most left element is outside of sliding window, we need to subtract the ans if we did `flip` before.
+            if(i >= n) { 
                 if(s1[i - n] != s[i - n]) --ans1;
                 if(s2[i - n] != s[i - n]) --ans2;
             }
