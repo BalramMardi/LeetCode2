@@ -33,22 +33,22 @@ public:
             }
         }
 
-        vector<string> createdRecipes;
+        vector<string> ans;
         while (!queue.empty()) {
             int recipeIdx = queue.front();
             queue.pop();
-            string recipe = recipes[recipeIdx];
-            createdRecipes.push_back(recipe);
+            string u = recipes[recipeIdx];
+            ans.push_back(u);
 
-            if (!graph.count(recipe)) continue;
+            if (!graph.count(u)) continue;
 
-            for (string& dependentRecipe : graph[recipe]) {
-                if (--inDegree[recToIdx[dependentRecipe]] == 0) {
-                    queue.push(recToIdx[dependentRecipe]);
+            for (string& v : graph[u]) {
+                if (--inDegree[recToIdx[v]] == 0) {
+                    queue.push(recToIdx[v]);
                 }
             }
         }
 
-        return createdRecipes;
+        return ans;
     }
 };
