@@ -2,7 +2,7 @@ class Solution {
 public:
     bool check(vector<int>& nums) {
         int n = nums.size();
-        if (n <= 1) return true;
+        if (n <= 2) return true;
 
         int inversionCount = 0;
 
