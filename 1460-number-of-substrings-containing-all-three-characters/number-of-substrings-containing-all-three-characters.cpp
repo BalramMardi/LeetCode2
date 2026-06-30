@@ -1,29 +1,21 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        int len = s.length();
-        int left = 0, right = 0;
-        vector<int> freq(3, 0);
-        int total = 0;
-
-        while (right < len) {
-            char curr = s[right];
-            freq[curr - 'a']++;
-            while (hasAllChars(freq)) {
-                total += len - right;
-                char leftChar = s[left];
-                freq[leftChar - 'a']--;
-                left++;
+        int count[3] = {0, 0, 0};
+        int l = 0, ans = 0;
+        int n = s.length();
+        
+        for (int r = 0; r < n; ++r) {
+            count[s[r] - 'a']++;
+            
+            while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
+                count[s[l] - 'a']--;
+                l++;
             }
-
-            right++;
+            
+            ans += l;
         }
-
-        return total;
-    }
-
-private:
-    bool hasAllChars(vector<int>& freq) {
-        return freq[0] > 0 && freq[1] > 0 && freq[2] > 0;
+        
+        return ans;
     }
 };
