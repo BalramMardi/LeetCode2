@@ -1,5 +1,4 @@
-# Write your MySQL query statement below
-
-SELECT teacher_id, COUNT(DISTINCT(subject_id)) as cnt
-FROM Teacher
-GROUP BY teacher_id
+-- Write your PostgreSQL query statement below
+select teacher_id, Count(distinct(subject_id)) as cnt 
+from Teacher 
+group by teacher_id
