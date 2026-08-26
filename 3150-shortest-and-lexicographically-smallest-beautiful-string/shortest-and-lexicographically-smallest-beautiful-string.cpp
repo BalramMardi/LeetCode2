@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string shortestBeautifulSubstring(string s, int k) {
+        string ans = "";
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            int ones = 0;
+            for (int j = i; j < n; j++) {
+                if (s[j] == '1') {
+                    ones++;
+                }
+                if (ones == k) {
+                    string sub = s.substr(i, j - i + 1);
+                    if (ans == "") {
+                        ans = sub;
+                    } else if (sub.length() < ans.length()) {
+                        ans = sub;
+                    } else if (sub.length() == ans.length() && sub < ans) {
+                        ans = sub;
+                    }
+                } else if (ones > k) {
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};
